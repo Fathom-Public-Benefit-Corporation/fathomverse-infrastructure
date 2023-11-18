@@ -77,5 +77,5 @@ variable "controller_container_name" {
 variable "run_seed_script" {
   description = "Flag to determine if the seed script should run"
   type        = bool
-  default     = true
+  default     = false
 }

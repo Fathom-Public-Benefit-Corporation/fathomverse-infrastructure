@@ -13,17 +13,18 @@ resource "docker_container" "indy_node" {
   name  = var.container_name
 
   env = concat(
-    [
-      "INDY_NODE_IP=${var.indy_node_ip}",
-      "INDY_NODE_PORT=${var.indy_node_port}",
-      "INDY_CLIENT_IP=${var.indy_client_ip}",
-      "INDY_CLIENT_PORT=${var.indy_client_port}",
-      "INDY_NETWORK_NAME=${var.indy_network_name}",
-      "INDY_NODE_NAME=${var.indy_node_name}",
-      "CONTROLLER_CONTAINER_NAME=${var.controller_container_name}"
-    ],
-    length(data.local_file.node_env) > 0 ? split("\n", data.local_file.node_env[0].content) : []
-  )
+  [
+    length(data.local_file.node_env) > 0 ? trimspace(data.local_file.node_env[0].content) : "INDY_NODE_SEED=",
+    "INDY_NODE_IP=${var.indy_node_ip}",
+    "INDY_NODE_PORT=${var.indy_node_port}",
+    "INDY_CLIENT_IP=${var.indy_client_ip}",
+    "INDY_CLIENT_PORT=${var.indy_client_port}",
+    "INDY_NETWORK_NAME=${var.indy_network_name}",
+    "INDY_NODE_NAME=${var.indy_node_name}",
+    "CONTROLLER_CONTAINER_NAME=${var.controller_container_name}"
+  ]
+)
+
 
   dynamic "ports" {
     for_each = var.indy_node_external_ports
