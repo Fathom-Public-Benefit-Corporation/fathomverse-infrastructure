@@ -14,13 +14,8 @@
 │   │   └── versions.tf
 │   └── indy_node
 │       ├── etc_indy
-│       │   ├── indy_config.py
-│       │   ├── node_control.conf
-│       │   └── __pycache__
 │       ├── lib_indy
-│       │   └── fathomverse
 │       ├── log_indy
-│       │   └── fathomverse
 │       ├── main.tf
 │       ├── outputs.tf
 │       ├── variables.tf

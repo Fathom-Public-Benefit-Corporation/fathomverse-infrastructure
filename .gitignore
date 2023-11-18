@@ -9,4 +9,3 @@
 **/fathomverse/*.json
 **/lib_indy/plugins
 **/log_indy/fathomverse/*.log
-**.env
