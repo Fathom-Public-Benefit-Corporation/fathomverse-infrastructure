@@ -1,6 +1,40 @@
 # infrastructure
 
-This is a Terraform project with a professional layout.
+```
+.
+├── environments
+│   ├── dev
+│   └── prod
+├── main.tf
+├── modules
+│   ├── careeronestop
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── variables.tf
+│   │   └── versions.tf
+│   └── indy_node
+│       ├── etc_indy
+│       │   ├── indy_config.py
+│       │   ├── node_control.conf
+│       │   └── __pycache__
+│       ├── lib_indy
+│       │   └── fathomverse
+│       ├── log_indy
+│       │   └── fathomverse
+│       ├── main.tf
+│       ├── outputs.tf
+│       ├── variables.tf
+│       └── versions.tf
+├── provider.tf
+├── README.md
+├── scripts
+│   └── generate_random_seeds.sh
+├── scripts.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
+├── terraform.tfvars
+└── variables.tf
+```
 
 ## How to initialize and apply
 
