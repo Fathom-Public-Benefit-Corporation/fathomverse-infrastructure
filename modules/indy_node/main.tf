@@ -1,6 +1,6 @@
 data "local_file" "node_env" {
-  filename = "${path.root}/scripts/.node.env"
-  count    = fileexists("${path.root}/scripts/.node.env") ? 1 : 0
+  filename = "${path.root}/.node.env"
+  count    = fileexists("${path.root}/.node.env") ? 1 : 0
 }
 
 resource "docker_image" "indy_node" {
