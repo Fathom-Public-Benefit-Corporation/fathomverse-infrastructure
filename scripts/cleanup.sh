@@ -10,5 +10,7 @@ sudo rm -rf ../modules/indy_node/lib_indy/fathomverse/*.json
 sudo rm -rf ../modules/indy_node/etc_indy/__pycache__/
 sudo rm -rf ../modules/indy_node/lib_indy/plugins/
 sudo rm -rf ../modules/indy_node/log_indy/fathomverse/*.log
+sudo rm ../modules/indy_node/lib_indy/fathomverse/domain_transactions_genesis
+sudo rm ../modules/indy_node/lib_indy/fathomverse/pool_transactions_genesis
 
 echo "Cleanup completed."
