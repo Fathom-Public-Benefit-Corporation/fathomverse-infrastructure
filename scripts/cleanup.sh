@@ -13,4 +13,10 @@ sudo rm -rf ../modules/indy_node/log_indy/fathomverse/*.log
 sudo rm ../modules/indy_node/lib_indy/fathomverse/domain_transactions_genesis
 sudo rm ../modules/indy_node/lib_indy/fathomverse/pool_transactions_genesis
 
+rm ../modules/indy_node/.terraform.lock.hcl
+rm -rf ../.terraform/
+rm ../.terraform.lock.hcl
+rm ../terraform.tfstate
+rm ../terraform.tfstate.backup
+
 echo "Cleanup completed."

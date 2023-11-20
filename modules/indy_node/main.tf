@@ -9,6 +9,8 @@ resource "docker_image" "indy_node" {
 }
 
 resource "docker_container" "indy_node" {
+  depends_on = [data.local_file.node_env]
+  
   image = docker_image.indy_node.name
   name  = var.container_name
 
