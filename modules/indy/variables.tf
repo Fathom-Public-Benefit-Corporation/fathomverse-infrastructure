@@ -1,4 +1,4 @@
-variable "container_name" {
+variable "indy_node_container_name" {
   description = "Name for the Indy Node Docker container."
   type        = string
 }
@@ -43,7 +43,17 @@ variable "indy_node_name" {
   type        = string
 }
 
-variable "controller_container_name" {
-  description = "Controller container name for the Indy Node."
+variable "indy_controller_container_name" {
+  description = "Indy Controller container name for the Indy Node and Indy Controller"
+  type        = string
+}
+
+variable "indy_controller_image" {
+  description = "Docker image for Indy Controller"
+  type        = string
+}
+
+variable "docker_sock_host_path" {
+  description = "Docker socket path on host"
   type        = string
 }

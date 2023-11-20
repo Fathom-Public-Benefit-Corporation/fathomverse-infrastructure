@@ -9,7 +9,7 @@ variable "careeronestop_container_name" {
 variable "careeronestop_dockerfile_path" {
   description = "Path to the Dockerfile."
   type        = string
-  default     = "/home/dev/workspace/fathom/careeronestop-py-service/"  # You can adjust the default path as needed
+  default     = "/home/dev/workspace/fathom/careeronestop-py-service/" # You can adjust the default path as needed
 }
 
 variable "careeronestop_external_port" {
@@ -65,11 +65,20 @@ variable "indy_node_name" {
   type        = string
 }
 
-variable "controller_container_name" {
-  description = "Controller container name for the Indy Node."
+variable "indy_controller_container_name" {
+  description = "Indy Controller container name for the Indy Node's controller."
   type        = string
 }
 
+variable "indy_controller_image" {
+  description = "Indy Controller image for the Indy Node's Controller"
+  type        = string
+}
+
+variable "sock" {
+  description = "host path to docker.sock"
+  type        = string
+}
 ###########################################################
 # SCRIPTS 
 ###########################################################
