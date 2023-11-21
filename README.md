@@ -1,9 +1,10 @@
 # infrastructure
-
 ```
 .
 ├── environments
 │   ├── dev
+│   ├── local
+│   │   └── cliconfig.json
 │   └── prod
 ├── main.tf
 ├── modules
@@ -12,7 +13,7 @@
 │   │   ├── outputs.tf
 │   │   ├── variables.tf
 │   │   └── versions.tf
-│   └── indy_node
+│   └── indy
 │       ├── etc_indy
 │       ├── lib_indy
 │       ├── log_indy
@@ -40,9 +41,8 @@
 2. Plan the Terraform configuration: `terraform plan`
 3. Apply the Terraform configuration: `terraform apply -var-file=terraform.tfvars -auto-approve`
 
-### Getting Started with `Trustee`
-Prerequisite: 
-- Running Ubuntu 18.04 LTS
+### Pre-requisites
+- Ubuntu 18.04 LTS
 - Install [indy-cli](https://github.com/hyperledger/indy-sdk/blob/main/README.md#ubuntu-based-distributions-ubuntu-1604-and-1804)
 ```
 sudo apt-get install ca-certificates -y
@@ -58,22 +58,23 @@ indy-cli
 indy>
 ```
 Create a wallet and open the wallet, then create Trustees and Stewards.
+### Getting Started with `Trustee`
 The seed for a Trustee of `V4SGRU86Z58d6TV7PBUe6f` is `000000000000000000000000Trustee1`.
 The seed for a Trustee of `LnXR1rPnncTPZvRdmJKhJQ` is `000000000000000000000000Trustee2`.
 The seed for a Trustee of `PNQm3CwyXbN5e39Rw3dXYx` is `000000000000000000000000Trustee3`.
 ```terminal
 JOHN:indy> did new seed=000000000000000000000000Trustee1 
 Did "V4SGRU86Z58d6TV7PBUe6f" has been created with "~CoRER63DVYnWZtK8uAzNbx" verkey
-
 JOHN:indy> did new seed=000000000000000000000000Trustee2
 Did "LnXR1rPnncTPZvRdmJKhJQ" has been created with "~RTBtVN3iwcFhbWZzohFTMi" verkey
-
 JOHN:indy> did new seed=000000000000000000000000Trustee3
 Did "PNQm3CwyXbN5e39Rw3dXYx" has been created with "~AHtGeRXtGjVfXALtXP9WiX" verkey
 ```
+### Getting Started with `Steward`
 The seed for a Steward of `Th7MpTaRZVRYnPiabds81Y` is `000000000000000000000000Steward1`.
 The seed for a Steward of `EbP4aYNeTHL6q385GuVpRV` is `000000000000000000000000Steward2`.
 The seed for a Steward of `4cU41vWW82ArfxJxHkzXPG` is `000000000000000000000000Steward3`.
+The seed for a Steward of `TWwCRQRZ2ZHMJFn9TzLp7W` is `000000000000000000000000Steward4`.
 ```
 JOHN:indy> did new seed=000000000000000000000000Steward1
 Did "Th7MpTaRZVRYnPiabds81Y" has been created with "~7TYfekw4GUagBnBVCqPjiC" verkey.
@@ -81,8 +82,10 @@ JOHN:indy> did new seed=000000000000000000000000Steward2
 Did "EbP4aYNeTHL6q385GuVpRV" has been created with "~RHGNtfvkgPEUQzQNtNxLNu" verkey
 JOHN:indy> did new seed=000000000000000000000000Steward3
 Did "4cU41vWW82ArfxJxHkzXPG" has been created with "~EMoPA6HrpiExVihsVfxD3H" verkey
+JOHN:indy> did new seed=000000000000000000000000Steward4
+Did "TWwCRQRZ2ZHMJFn9TzLp7W" has been created with "~UhP7K35SAXbix1kCQV4Upx" verkey
 ```
-Building a transaction
+### Building a transactionexit
 ```terminal
 pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger nym did=V4SGRU86Z58d6TV7PBUe6f verkey=~CoRER63DVYnWZtK8uAzNbx role=TRUSTEE send=false
 
