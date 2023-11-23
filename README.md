@@ -1,18 +1,16 @@
-# infrastructure
+# fathomverse-infrastructure
 ```
 .
 ├── environments
-│   ├── dev
 │   ├── local
-│   │   └── cliconfig.json
-│   └── prod
+│   │   ├── cliconfig.json
+│   │   ├── Nodes.csv
+│   │   ├── README.md
+│   │   └── Trustees.csv
+│   └── testnet
+│       └── README.md
 ├── main.tf
 ├── modules
-│   ├── careeronestop
-│   │   ├── main.tf
-│   │   ├── outputs.tf
-│   │   ├── variables.tf
-│   │   └── versions.tf
 │   └── indy
 │       ├── etc_indy
 │       ├── lib_indy
@@ -31,6 +29,8 @@
 │   ├── ip_tables_utils.sh
 │   └── set_iptables.sh
 ├── scripts.tf
+├── terraform.tfstate
+├── terraform.tfstate.backup
 ├── terraform.tfvars
 └── variables.tf
 ```

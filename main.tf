@@ -7,13 +7,6 @@ terraform {
   }
 }
 
-module "careeronestop" {
-  source          = "./modules/careeronestop"
-  container_name  = var.careeronestop_container_name
-  dockerfile_path = var.careeronestop_dockerfile_path
-  external_port   = var.careeronestop_external_port
-}
-
 module "indy" {
   source                         = "./modules/indy"
   indy_node_container_name       = var.indy_node_container_name

@@ -1,22 +1,4 @@
 ###########################################################
-# CAREERONESTOP 
-###########################################################
-variable "careeronestop_container_name" {
-  description = "Name for the Docker container."
-  type        = string
-}
-
-variable "careeronestop_dockerfile_path" {
-  description = "Path to the Dockerfile."
-  type        = string
-  default     = "/home/dev/workspace/fathom/careeronestop-py-service/" # You can adjust the default path as needed
-}
-
-variable "careeronestop_external_port" {
-  description = "External port for the Docker container."
-  type        = number
-}
-###########################################################
 # INDY NODE 
 ###########################################################
 variable "indy_node_container_name" {
