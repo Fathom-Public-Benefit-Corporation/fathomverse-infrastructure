@@ -3,33 +3,35 @@ data "local_file" "node_env" {
   count    = fileexists("${path.root}/.node.env") ? 1 : 0
 }
 
-resource "docker_image" "indy_node" {
+###########################################################
+# INDY NODE 1
+###########################################################
+resource "docker_image" "indy_node1" {
   name         = var.indy_node_image
   keep_locally = false
 }
 
-resource "docker_container" "indy_node" {
+resource "docker_container" "indy_node1" {
   depends_on = [data.local_file.node_env]
 
-  image = docker_image.indy_node.name
-  name  = var.indy_node_container_name
+  image = docker_image.indy_node1.name
+  name  = var.indy_node1_container_name
 
   env = concat(
     [
       length(data.local_file.node_env) > 0 ? trimspace(data.local_file.node_env[0].content) : "INDY_NODE_SEED=",
-      "INDY_NODE_IP=${var.indy_node_ip}",
-      "INDY_NODE_PORT=${var.indy_node_port}",
-      "INDY_CLIENT_IP=${var.indy_client_ip}",
-      "INDY_CLIENT_PORT=${var.indy_client_port}",
+      "INDY_NODE_IP=${var.indy_node1_ip}",
+      "INDY_NODE_PORT=${var.indy_node1_port}",
+      "INDY_CLIENT_IP=${var.indy_node1_client_ip}",
+      "INDY_CLIENT_PORT=${var.indy_node1_client_port}",
       "INDY_NETWORK_NAME=${var.indy_network_name}",
-      "INDY_NODE_NAME=${var.indy_node_name}",
+      "INDY_NODE_NAME=${var.indy_node1_name}",
       "CONTROLLER_CONTAINER_NAME=${var.indy_controller_container_name}"
     ]
   )
 
-
   dynamic "ports" {
-    for_each = var.indy_node_external_ports
+    for_each = var.indy_node1_external_ports
     content {
       internal = ports.value
       external = ports.value
@@ -52,20 +54,23 @@ resource "docker_container" "indy_node" {
   restart = "always"
 }
 
+###########################################################
+# INDY CONTROLLER
+###########################################################
 resource "docker_image" "indy_controller" {
   name         = var.indy_controller_image
   keep_locally = false
 }
 
 resource "docker_container" "indy_controller" {
-  depends_on = [docker_container.indy_node]
+  depends_on = [docker_container.indy_node1]
 
   image = docker_image.indy_controller.name
   name  = var.indy_controller_container_name
 
   env = [
     "INDY_NETWORK_NAME=${var.indy_network_name}",
-    "NODE_CONTAINER=${var.indy_node_container_name}",
+    "NODE_CONTAINER=${var.indy_node1_container_name}",
     "CONTROLLER_CONTAINER_NAME=${var.indy_controller_container_name}"
   ]
 

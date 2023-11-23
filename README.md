@@ -3,22 +3,14 @@
 .
 ├── environments
 │   ├── local
-│   │   ├── cliconfig.json
-│   │   ├── Nodes.csv
-│   │   ├── README.md
-│   │   └── Trustees.csv
 │   └── testnet
-│       └── README.md
 ├── main.tf
 ├── modules
-│   └── indy
-│       ├── etc_indy
-│       ├── lib_indy
-│       ├── log_indy
-│       ├── main.tf
-│       ├── outputs.tf
-│       ├── variables.tf
-│       └── versions.tf
+│   ├── indy
+│   ├── indy_node1
+│   ├── indy_node2
+│   ├── indy_node3
+│   └── indy_node4
 ├── provider.tf
 ├── README.md
 ├── scripts
@@ -29,8 +21,6 @@
 │   ├── ip_tables_utils.sh
 │   └── set_iptables.sh
 ├── scripts.tf
-├── terraform.tfstate
-├── terraform.tfstate.backup
 ├── terraform.tfvars
 └── variables.tf
 ```
