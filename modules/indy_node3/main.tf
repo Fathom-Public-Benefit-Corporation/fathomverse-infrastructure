@@ -1,6 +1,6 @@
 data "local_file" "node_env" {
-  filename = "${path.root}/.node.env"
-  count    = fileexists("${path.root}/.node.env") ? 1 : 0
+  filename = "${path.root}/.node3.env"
+  count    = fileexists("${path.root}/.node3.env") ? 1 : 0
 }
 ###########################################################
 # INDY NODE 3
