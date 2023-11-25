@@ -33,6 +33,9 @@ indy_node4_client_ip      = "0.0.0.0"
 indy_node4_client_port    = 9708
 indy_node4_name           = "Steward4"
 
-indy_controller_container_name = "indy_node_controller"
+indy_controller1_container_name = "indy_controller1"
+indy_controller2_container_name = "indy_controller2"
+indy_controller3_container_name = "indy_controller3"
+indy_controller4_container_name = "indy_controller4"
 indy_controller_image          = "ghcr.io/hyperledger/indy-node-container/indy_node_controller:1.2.3"
 sock                           = "/var/run/docker.sock"

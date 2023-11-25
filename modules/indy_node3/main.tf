@@ -2,6 +2,7 @@ data "local_file" "node_env" {
   filename = "${path.root}/.node3.env"
   count    = fileexists("${path.root}/.node3.env") ? 1 : 0
 }
+
 ###########################################################
 # INDY NODE 3
 ###########################################################
@@ -25,7 +26,7 @@ resource "docker_container" "indy_node3" {
       "INDY_CLIENT_PORT=${var.indy_node3_client_port}",
       "INDY_NETWORK_NAME=${var.indy_network_name}",
       "INDY_NODE_NAME=${var.indy_node3_name}",
-      "CONTROLLER_CONTAINER_NAME=${var.indy_controller_container_name}"
+      "CONTROLLER_CONTAINER_NAME=${var.indy_controller3_container_name}"
     ]
   )
 
@@ -50,5 +51,46 @@ resource "docker_container" "indy_node3" {
     host_path      = abspath("${path.module}/log_indy")
   }
 
+  networks_advanced {
+    name = var.indy_network_name
+  }
+
   restart = "always"
+}
+
+###########################################################
+# INDY CONTROLLER
+###########################################################
+resource "docker_image" "indy_controller3" {
+  name         = var.indy_controller_image
+  keep_locally = false
+}
+
+resource "docker_container" "indy_controller3" {
+  depends_on = [docker_container.indy_node3]
+
+  image = docker_image.indy_controller3.name
+  name  = var.indy_controller3_container_name
+
+  env = [
+    "INDY_NETWORK_NAME=${var.indy_network_name}",
+    "NODE_CONTAINER=${var.indy_node3_container_name}",
+    "CONTROLLER_CONTAINER_NAME=${var.indy_controller3_container_name}"
+  ]
+
+  volumes {
+    container_path = "/etc/indy"
+    host_path      = abspath("${path.module}/etc_indy")
+  }
+
+  volumes {
+    container_path = "/var/run/docker.sock"
+    host_path      = var.docker_sock_host_path
+  }
+
+  networks_advanced {
+    name = var.indy_network_name
+  }
+
+  init = true
 }

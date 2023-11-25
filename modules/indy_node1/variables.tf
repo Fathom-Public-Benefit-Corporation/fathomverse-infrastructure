@@ -49,7 +49,7 @@ variable "indy_node1_name" {
 ###########################################################
 # INDY CONTROLLER
 ###########################################################
-variable "indy_controller_container_name" {
+variable "indy_controller1_container_name" {
   description = "Indy Controller container name for the Indy Node and Indy Controller"
   type        = string
 }

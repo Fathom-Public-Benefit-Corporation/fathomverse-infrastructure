@@ -14,6 +14,16 @@ TARGET_DIRECTORIES=(
     "modules/indy_node4/lib_indy/fathomverse"
 )
 
+# Function to safely remove a file if it exists
+safe_remove() {
+    local file=$1
+    if [ -f "$file" ]; then
+        sudo rm "$file" && echo "Removed $file"
+    else
+        echo "File $file does not exist, skipping removal."
+    fi
+}
+
 # Function to copy files
 copy_files() {
     local target_dir=$1
@@ -22,9 +32,12 @@ copy_files() {
     cp -v "$POOL_GENESIS_FILE" "$target_dir"
 }
 
-# Iterate over each target directory and copy the files
+# Iterate over each target directory, remove old files and copy the new files
 for dir in "${TARGET_DIRECTORIES[@]}"; do
     if [ -d "$dir" ]; then
+        echo "Processing $dir ..."
+        safe_remove "$dir/domain_transactions_genesis"
+        safe_remove "$dir/pool_transactions_genesis"
         copy_files "$dir"
     else
         echo "Directory $dir does not exist. Skipping."

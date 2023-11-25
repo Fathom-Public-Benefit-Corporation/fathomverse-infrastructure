@@ -49,7 +49,17 @@ variable "indy_node4_name" {
 ###########################################################
 # INDY CONTROLLER
 ###########################################################
-variable "indy_controller_container_name" {
+variable "indy_controller4_container_name" {
   description = "Indy Controller container name for the Indy Node and Indy Controller"
+  type        = string
+}
+
+variable "indy_controller_image" {
+  description = "Docker image for Indy Controller"
+  type        = string
+}
+
+variable "docker_sock_host_path" {
+  description = "Docker socket path on host"
   type        = string
 }

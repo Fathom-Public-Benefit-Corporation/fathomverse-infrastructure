@@ -7,6 +7,15 @@ terraform {
   }
 }
 
+resource "docker_network" "fathomverse" {
+  name    = "fathomverse"
+  driver  = "bridge"
+  ipam_config {
+    subnet  = "10.133.133.0/24"
+    gateway = "10.133.133.254"
+  }
+}
+
 module "indy_node1" {
   source            = "./modules/indy_node1"
   indy_network_name = var.indy_network_name
@@ -20,9 +29,9 @@ module "indy_node1" {
   indy_node1_client_port    = var.indy_node1_client_port
   indy_node1_name           = var.indy_node1_name
 
-  indy_controller_container_name = var.indy_controller_container_name
-  indy_controller_image          = var.indy_controller_image
-  docker_sock_host_path          = var.sock
+  indy_controller1_container_name = var.indy_controller1_container_name
+  indy_controller_image           = var.indy_controller_image
+  docker_sock_host_path           = var.sock
 }
 
 module "indy_node2" {
@@ -38,7 +47,9 @@ module "indy_node2" {
   indy_node2_client_port    = var.indy_node2_client_port
   indy_node2_name           = var.indy_node2_name
 
-  indy_controller_container_name = var.indy_controller_container_name
+  indy_controller2_container_name = var.indy_controller2_container_name
+  indy_controller_image           = var.indy_controller_image
+  docker_sock_host_path           = var.sock
 }
 
 module "indy_node3" {
@@ -54,7 +65,9 @@ module "indy_node3" {
   indy_node3_client_port    = var.indy_node3_client_port
   indy_node3_name           = var.indy_node3_name
 
-  indy_controller_container_name = var.indy_controller_container_name
+  indy_controller3_container_name = var.indy_controller3_container_name
+  indy_controller_image           = var.indy_controller_image
+  docker_sock_host_path           = var.sock
 }
 
 module "indy_node4" {
@@ -70,5 +83,7 @@ module "indy_node4" {
   indy_node4_client_port    = var.indy_node4_client_port
   indy_node4_name           = var.indy_node4_name
 
-  indy_controller_container_name = var.indy_controller_container_name
+  indy_controller4_container_name = var.indy_controller4_container_name
+  indy_controller_image           = var.indy_controller_image
+  docker_sock_host_path           = var.sock
 }

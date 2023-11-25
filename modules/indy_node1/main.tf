@@ -26,7 +26,7 @@ resource "docker_container" "indy_node1" {
       "INDY_CLIENT_PORT=${var.indy_node1_client_port}",
       "INDY_NETWORK_NAME=${var.indy_network_name}",
       "INDY_NODE_NAME=${var.indy_node1_name}",
-      "CONTROLLER_CONTAINER_NAME=${var.indy_controller_container_name}"
+      "CONTROLLER_CONTAINER_NAME=${var.indy_controller1_container_name}"
     ]
   )
 
@@ -51,27 +51,31 @@ resource "docker_container" "indy_node1" {
     host_path      = abspath("${path.module}/log_indy")
   }
 
+  networks_advanced {
+    name = var.indy_network_name
+  }
+
   restart = "always"
 }
 
 ###########################################################
 # INDY CONTROLLER
 ###########################################################
-resource "docker_image" "indy_controller" {
+resource "docker_image" "indy_controller1" {
   name         = var.indy_controller_image
   keep_locally = false
 }
 
-resource "docker_container" "indy_controller" {
+resource "docker_container" "indy_controller1" {
   depends_on = [docker_container.indy_node1]
 
-  image = docker_image.indy_controller.name
-  name  = var.indy_controller_container_name
+  image = docker_image.indy_controller1.name
+  name  = var.indy_controller1_container_name
 
   env = [
     "INDY_NETWORK_NAME=${var.indy_network_name}",
     "NODE_CONTAINER=${var.indy_node1_container_name}",
-    "CONTROLLER_CONTAINER_NAME=${var.indy_controller_container_name}"
+    "CONTROLLER_CONTAINER_NAME=${var.indy_controller1_container_name}"
   ]
 
   volumes {
@@ -82,6 +86,10 @@ resource "docker_container" "indy_controller" {
   volumes {
     container_path = "/var/run/docker.sock"
     host_path      = var.docker_sock_host_path
+  }
+
+  networks_advanced {
+    name = var.indy_network_name
   }
 
   init = true
