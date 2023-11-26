@@ -1,5 +1,10 @@
 #!/bin/bash
 
+NETWORK_NAME="fathomverse"
+NETWORK_SUBNET="10.133.133.0/24"
+NETWORK_GATEWAY="10.133.133.254"
+CONTAINERS=("indy_node1_service" "indy_node2_service" "indy_node3_service" "indy_node4_service" "indy_controller1" "indy_controller2" "indy_controller3" "indy_controller4")
+
 # Function to check if a Docker network exists
 network_exists() {
     docker network ls | grep -w "$1" > /dev/null
@@ -10,17 +15,18 @@ container_connected_to_network() {
     docker network inspect "$1" | grep -w "$2" > /dev/null
 }
 
-NETWORK_NAME="fathomverse"
-NETWORK_SUBNET="10.133.133.0/24"
-NETWORK_GATEWAY="10.133.133.254"
+# Function to disconnect container from network, if connected
+disconnect_container_from_network() {
+    local network=$1
+    local container=$2
 
-# Create the Docker network if it doesn't exist
-if ! network_exists "$NETWORK_NAME"; then
-    echo "Creating network $NETWORK_NAME"
-    docker network create --driver bridge --subnet "$NETWORK_SUBNET" --gateway "$NETWORK_GATEWAY" "$NETWORK_NAME"
-else
-    echo "Network $NETWORK_NAME already exists"
-fi
+    if container_connected_to_network "$network" "$container"; then
+        echo "Disconnecting $container from $network"
+        docker network disconnect "$network" "$container"
+    else
+        echo "$container is not connected to $network"
+    fi
+}
 
 # Function to connect container to network with specific IP, if not already connected
 connect_container_to_network() {
@@ -35,6 +41,26 @@ connect_container_to_network() {
         echo "$container is already connected to $network"
     fi
 }
+
+# Disconnect and remove network if it exists
+if network_exists "$NETWORK_NAME"; then
+    for container in "${CONTAINERS[@]}"; do
+        disconnect_container_from_network "$NETWORK_NAME" "$container"
+    done
+
+    echo "Removing network $NETWORK_NAME"
+    docker network rm "$NETWORK_NAME"
+else
+    echo "Network $NETWORK_NAME does not exist"
+fi
+
+# Create the Docker network if it doesn't exist
+if ! network_exists "$NETWORK_NAME"; then
+    echo "Creating network $NETWORK_NAME"
+    docker network create --driver bridge --subnet "$NETWORK_SUBNET" --gateway "$NETWORK_GATEWAY" "$NETWORK_NAME"
+else
+    echo "Network $NETWORK_NAME already exists"
+fi
 
 # Connect containers to the network with specific IPs
 connect_container_to_network "$NETWORK_NAME" "indy_node1_service" "10.133.133.1"

@@ -7,15 +7,6 @@ terraform {
   }
 }
 
-resource "docker_network" "fathomverse" {
-  name    = "fathomverse"
-  driver  = "bridge"
-  ipam_config {
-    subnet  = "10.133.133.0/24"
-    gateway = "10.133.133.254"
-  }
-}
-
 module "indy_node1" {
   source            = "./modules/indy_node1"
   indy_network_name = var.indy_network_name

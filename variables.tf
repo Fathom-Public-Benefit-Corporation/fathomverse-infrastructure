@@ -197,8 +197,8 @@ variable "sock" {
 ###########################################################
 # SCRIPTS 
 ###########################################################
-variable "create_docker_network_script" {
-  description = "Flag to determine if `create_docker_network.sh` should run"
+variable "manage_docker_network_script" {
+  description = "Flag to determine if `manage_docker_network.sh` should run"
   type        = bool
   default     = true
 }

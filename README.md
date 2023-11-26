@@ -1,12 +1,12 @@
 # fathomverse-infrastructure
 ```
 .
+├── container_ips.txt
 ├── environments
 │   ├── local
 │   └── testnet
 ├── main.tf
 ├── modules
-│   ├── indy
 │   ├── indy_node1
 │   ├── indy_node2
 │   ├── indy_node3
@@ -14,13 +14,14 @@
 ├── provider.tf
 ├── README.md
 ├── scripts
-│   ├── add_ddos_protection_iptables_rule.sh
 │   ├── check_network_connectivity.sh
-│   ├── cleanup.sh
 │   ├── generate_random_seeds.sh
-│   ├── ip_tables_utils.sh
-│   └── set_iptables.sh
+│   ├── get_container_ips.sh
+│   ├── manage_docker_network.sh
+│   ├── sudo_cleanup_modules.sh
+│   └── update_indy_genesis_files.sh
 ├── scripts.tf
+├── terraform.tfstate
 ├── terraform.tfvars
 └── variables.tf
 ```
