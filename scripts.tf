@@ -1,16 +1,3 @@
-resource "null_resource" "cleanup_on_destroy" {
-  # Changes to any instance of the resource forces a new resource to be created
-  triggers = {
-    always_run = "${timestamp()}"
-  }
-
-  # Provisioner to run a script on destroy
-  provisioner "local-exec" {
-    when    = destroy
-    command = "bash ${path.module}/scripts/cleanup_script.sh"
-  }
-}
-
 resource "null_resource" "manage_docker_network_script" {
   count = var.manage_docker_network_script ? 1 : 0
 
