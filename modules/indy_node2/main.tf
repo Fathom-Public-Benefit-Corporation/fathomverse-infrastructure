@@ -53,6 +53,7 @@ resource "docker_container" "indy_node2" {
   
   networks_advanced {
     name = var.indy_network_name
+    ipv4_address = "10.133.133.2"
   }
 
   restart = "always"

@@ -12,6 +12,7 @@ TARGET_DIRECTORIES=(
     "modules/indy_node2/lib_indy/fathomverse"
     "modules/indy_node3/lib_indy/fathomverse"
     "modules/indy_node4/lib_indy/fathomverse"
+    "modules/ledger_browser/lib_indy/fathomverse"
 )
 
 # Function to safely remove a file if it exists
