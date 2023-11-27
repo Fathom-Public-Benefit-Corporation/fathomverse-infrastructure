@@ -1,4 +1,5 @@
 # fathomverse-infrastructure
+First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 ```
 .
 ├── container_ips.txt
@@ -128,9 +129,4 @@ pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger sign-multi txn={"identifier":
 
 Transaction has been signed:
 {"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signatures":{"V4SGRU86Z58d6TV7PBUe6f":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}}
-```
-Ledger Management
-- Add/Remove a node (Note: leave `services` field blank to blacklist)
-```terminal
-pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger node target=BRbHR3keRF9u3wvuFEF36A14hK6b6H1ufNMyU1212g6u node_ip=127.0.0.1 node_port=9701 client_ip=127.0.0.1 client_port=9702 alias=USEastJohn services=VALIDATOR blskey=cLP2EdgEKu7wKWFdhG2sZv12oiY63YWm83inXgvJ1oKzMpE9F3xxfg2fJzg5R6TdHc3SEMPhF2o4fGdhGQc6nqVPB36q4wZxzoWBrQn4bk4o2uLjinWpKDXfhQpK7g31rLWidnXq948VyV7tSED16b7vBhVGmYZhf4RLGjidFQHpbL blskey_pop=RbRNdVmmf75TgbqayiLuenomaSqV4VNNcttikNakNkPrxVcQ8FXGRSahfYS5mHFEprJo3szeXPUdPkk2opACzGR2R2VEB53jxCgPXHUfUp7WuKSsUvwPv4w7dCeRwmCfEi7Y7Gm22J3AmrTSgGe2naqbqzVJVvHyP7wc9qnWBsivcP
 ```
