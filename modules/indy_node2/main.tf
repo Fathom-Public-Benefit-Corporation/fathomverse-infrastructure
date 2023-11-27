@@ -52,7 +52,7 @@ resource "docker_container" "indy_node2" {
   }
   
   networks_advanced {
-    name = var.indy_network_name
+    name = var.docker_network_name
     ipv4_address = "10.133.133.2"
   }
 
@@ -90,7 +90,8 @@ resource "docker_container" "indy_controller2" {
   }
 
   networks_advanced {
-    name = var.indy_network_name
+    name = var.docker_network_name
+    ipv4_address = "10.133.133.6"
   }
 
   init = true

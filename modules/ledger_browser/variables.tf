@@ -1,7 +1,7 @@
-variable "network_name" {
+variable "docker_network_name" {
   description = "Name of the Docker network"
   type        = string
-  default     = "fathomverse"
+  default     = "sandbox"
 }
 
 variable "indy_network_name" {

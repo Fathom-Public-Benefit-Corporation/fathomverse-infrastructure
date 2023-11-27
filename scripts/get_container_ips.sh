@@ -8,6 +8,11 @@ CONTAINERS=(
     "indy_node2_service"
     "indy_node3_service"
     "indy_node4_service"
+    "indy_controller1"
+    "indy_controller2"
+    "indy_controller3"
+    "indy_controller4"
+    "ledger-browser"
 )
 
 # Output file

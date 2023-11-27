@@ -197,12 +197,6 @@ variable "sock" {
 ###########################################################
 # SCRIPTS 
 ###########################################################
-variable "manage_docker_network_script" {
-  description = "Flag to determine if `manage_docker_network.sh` should run"
-  type        = bool
-  default     = true
-}
-
 variable "run_seed_script" {
   description = "Flag to determine if the seed script should run"
   type        = bool

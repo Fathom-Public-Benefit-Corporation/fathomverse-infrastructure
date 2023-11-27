@@ -1,3 +1,9 @@
+variable "docker_network_name" {
+  description = "Name of the Docker network"
+  type        = string
+  default     = "sandbox"
+}
+
 variable "indy_network_name" {
   description = "Network name for the Indy Node."
   type        = string

@@ -7,6 +7,14 @@ terraform {
   }
 }
 
+resource "docker_network" "sandbox_network" {
+  name = "sandbox"
+  ipam_config {
+    subnet  = "10.133.133.0/24"
+    gateway = "10.133.133.254"
+  }
+}
+
 module "indy_node1" {
   source            = "./modules/indy_node1"
   indy_network_name = var.indy_network_name
@@ -77,4 +85,8 @@ module "indy_node4" {
   indy_controller4_container_name = var.indy_controller4_container_name
   indy_controller_image           = var.indy_controller_image
   docker_sock_host_path           = var.sock
+}
+
+module "ledger_browser" {
+  source = "./modules/ledger_browser"
 }
