@@ -2,7 +2,6 @@
 First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 ```
 .
-├── container_ips.txt
 ├── environments
 │   ├── local
 │   └── testnet
@@ -16,9 +15,8 @@ First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 ├── provider.tf
 ├── README.md
 ├── scripts
-│   ├── check_network_connectivity.sh
+│   ├── docker_network_port_scan.sh
 │   ├── generate_random_seeds.sh
-│   ├── get_container_ips.sh
 │   ├── sudo_cleanup_modules.sh
 │   └── update_indy_genesis_files.sh
 ├── scripts.tf
