@@ -115,9 +115,9 @@ make_domain_genesis(args.domain, trustee_defs, steward_defs)
 ```
 - Paste contents into the created python script `nano genesis_from_files.py` and save the file.
 - Also copy and paste the contents of both CSV files into new .csv files in the container at the same path of the script.
-- Run the script `python3 generate_from_files.py --trustees Trustees.csv --stewards Nodes.csv`.
-- Copy both `domain_transactions_genesis` and `pool_transactions_genesis` into the `modules/indy/libindy/fathomverse/` folder.
-- Apply changes to the ifnrastructure with `terraform apply`.  
+- Run the script `python3 ./generate_from_files.py --trustees Trustees.csv --stewards Nodes.csv`.
+- Copy both contents of `domain_transactions_genesis` and `pool_transactions_genesis` into their own files within the `modules/indy/libindy/fathomverse/` folder.
+- Apply changes to the infrastructure with `terraform apply`.  
 
 ### Add an acceptance Mechanism
 
@@ -125,4 +125,24 @@ To write to an Indy Node Ledger, you’ll need to sign the [Transaction Author A
 
 ```
 user@localhost:~$ indy-cli --config <path_to_cfg>/cliconfig.json
+```
+
+Once TAA has been configured, one can begin to create a wallet with a steward or trustee did, use the did, and create a pool, and connect to the created pool.
+
+Schemas may then be created, for example:
+```console
+pool(sandbox):JOHN:did(Th7...81Y):indy> ledger schema name=Achievement version=1.0 attr_names=id,type,alignment,achievementType,creator,creditsAvailable,criteria,description,endorsement,endorsementJwt,fieldOfStudy,humanCode,image,@language,name,otherIdentifier,related,resultDescription,specialization,tag,version
+Schema request has been sent to Ledger.
+Metadata:
++------------------------+-----------------+---------------------+---------------------+
+| From                   | Sequence Number | Request ID          | Transaction time    |
++------------------------+-----------------+---------------------+---------------------+
+| Th7MpTaRZVRYnPiabds81Y | 9               | 1701144269424701937 | 2023-11-28 04:04:29 |
++------------------------+-----------------+---------------------+---------------------+
+Data:
++-------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Name        | Version | Attributes                                                                                                                                                                                                                                                            |
++-------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Achievement | 1.0     | "resultDescription","endorsement","fieldOfStudy","id","creator","@language","name","creditsAvailable","humanCode","otherIdentifier","description","type","related","achievementType","endorsementJwt","specialization","criteria","version","tag","image","alignment" |
++-------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```

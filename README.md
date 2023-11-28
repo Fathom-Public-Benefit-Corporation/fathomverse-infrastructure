@@ -11,18 +11,19 @@ First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 │   ├── indy_node1
 │   ├── indy_node2
 │   ├── indy_node3
-│   └── indy_node4
+│   ├── indy_node4
+│   └── ledger_browser
 ├── provider.tf
 ├── README.md
 ├── scripts
 │   ├── check_network_connectivity.sh
 │   ├── generate_random_seeds.sh
 │   ├── get_container_ips.sh
-│   ├── manage_docker_network.sh
 │   ├── sudo_cleanup_modules.sh
 │   └── update_indy_genesis_files.sh
 ├── scripts.tf
 ├── terraform.tfstate
+├── terraform.tfstate.backup
 ├── terraform.tfvars
 └── variables.tf
 ```
@@ -37,37 +38,31 @@ First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 To cleanup each node's cache, data, keys, log files, and plugins use the script:
 - `sudo ./scripts/sudo_cleanup_modules.sh`
 
-To generate a random seed use the script:
+To generate a random seeds to be used foreach node use the script:
 - `./scripts/generate_random_seed.sh`
-   - Rename the `.node.env` files as you generate them foreach node (e.g. `.node1.env, .node2_.env, etc`)
+   - Generating new seeds requires one to recreate both genesis files.
 
 To update each module's genesis file with `environments/local` genesis files use the script:
 - `./scripts/update_indy_genesis_files.sh`
 
-To check the network using nmap use the scripts:
+To scan for any internal exposed ports in each docker container attached to a network use the scripts:
 ```terminal
-./scripts/get_container_ips.sh \
-&& INTERNAL_PORT=9701,9703,9705,9707 ./scripts/check_network_connectivity.sh container_ips.txt
+./scripts/docker_network_port_scan.sh
 ```
-example:
+example output:
 ```console
-Processing indy_node1_service...
-Processing indy_node2_service...
-Processing indy_node3_service...
-Processing indy_node4_service...
-IP addresses written to container_ips.txt.
-INTERNAL_PORT=9701,9703,9705,9707
-IP_FILE=container_ips.txt
-[...]    checking 10.133.133.1:9701,9703,9705,9707
-[OK]
-[...]    checking 10.133.133.2:9701,9703,9705,9707
-[OK]
-[...]    checking 10.133.133.3:9701,9703,9705,9707
-[OK]
-[...]    checking 10.133.133.4:9701,9703,9705,9707
-[OK]
+[INFO]   Found 1 containers in the network.
+[INFO]   Processing container ledger-browser with IP 10.133.133.9
+[...]    Checking 10.133.133.9:8000
 
-[DONE]\t All reachable
+Starting Nmap 7.60 ( https://nmap.org ) at 2023-11-27 22:34 EST
+Nmap scan report for 10.133.133.9
+Host is up (0.00017s latency).
+
+PORT     STATE SERVICE
+8000/tcp open  http-alt
+
+Nmap done: 1 IP address (1 host up) scanned in 0.03 seconds
 ```
 
 ### Transacting on localhosted Hyperledger Indy network
