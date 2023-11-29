@@ -89,4 +89,12 @@ module "indy_node4" {
 
 module "ledger_browser" {
   source = "./modules/ledger_browser"
+
+  web_server_host_port = "9000"
+}
+
+module "tails_server" {
+  source = "./modules/tails_server"
+
+  genesis_url = "http://${module.ledger_browser.ipv4_address}:9000/genesis"
 }
