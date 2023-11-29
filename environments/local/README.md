@@ -119,7 +119,7 @@ make_domain_genesis(args.domain, trustee_defs, steward_defs)
 - Copy both contents of `domain_transactions_genesis` and `pool_transactions_genesis` into their own files within the `modules/indy/libindy/fathomverse/` folder.
 - Apply changes to the infrastructure with `terraform apply`.  
 
-### Add an acceptance Mechanism
+### Add an acceptance mechanism
 
 To write to an Indy Node Ledger, you’ll need to sign the [Transaction Author Aggreement (TAA)](https://github.com/hyperledger/indy-sdk/blob/main/docs/how-tos/transaction-author-agreement.md). This agreement is incorporated into the process of connecting to the node pool and requires an acceptance mechanism. For the indy-cli, the default mechanism is “For Session” and the following instructions are required to be able to use “For Session” for your indy-cli:
 
@@ -145,4 +145,19 @@ Data:
 +-------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Achievement | 1.0     | "resultDescription","endorsement","fieldOfStudy","id","creator","@language","name","creditsAvailable","humanCode","otherIdentifier","description","type","related","achievementType","endorsementJwt","specialization","criteria","version","tag","image","alignment" |
 +-------------+---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+```
+
+### Building a transaction
+```terminal
+pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger nym did=V4SGRU86Z58d6TV7PBUe6f verkey=~CoRER63DVYnWZtK8uAzNbx role=TRUSTEE send=false
+
+Transaction has been created:
+     {"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signature":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}
+```
+Multi-signing a transaction (i.e., copy and paste "Building a transaction" result into `txn` field)
+```terminal
+pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger sign-multi txn={"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signature":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}
+
+Transaction has been signed:
+{"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signatures":{"V4SGRU86Z58d6TV7PBUe6f":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}}
 ```

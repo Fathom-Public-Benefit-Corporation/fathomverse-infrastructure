@@ -76,12 +76,16 @@ sudo apt-get install -y indy-cli
 ```
 Enter indy-cli
 ```terminal
-indy-cli
+user@localhost$ indy-cli
 
-indy>
+indy> wallet create JOHN key=...
+
+...
+
+indy> wallet open JOHN key=...
 ```
 
-Create a wallet and open the wallet, then create Trustees and Stewards.
+Create a wallet and open the wallet, then create Trustees and Stewards in the wallet.
 ### Getting Started with `Trustee`
 The seed for a Trustee of `V4SGRU86Z58d6TV7PBUe6f` is `000000000000000000000000Trustee1`.
 The seed for a Trustee of `LnXR1rPnncTPZvRdmJKhJQ` is `000000000000000000000000Trustee2`.
@@ -109,17 +113,9 @@ Did "4cU41vWW82ArfxJxHkzXPG" has been created with "~EMoPA6HrpiExVihsVfxD3H" ver
 JOHN:indy> did new seed=000000000000000000000000Steward4
 Did "TWwCRQRZ2ZHMJFn9TzLp7W" has been created with "~UhP7K35SAXbix1kCQV4Upx" verkey
 ```
-### Building a transaction
-```terminal
-pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger nym did=V4SGRU86Z58d6TV7PBUe6f verkey=~CoRER63DVYnWZtK8uAzNbx role=TRUSTEE send=false
 
-Transaction has been created:
-     {"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signature":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}
-```
-Multi-signing a transaction (i.e., copy and paste "Building a transaction" result into `txn` field)
-```terminal
-pool(fathomverse):JOHN:did(V4S...e6f):indy> ledger sign-multi txn={"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signature":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}
+### Registering a new did using the ledger browser
+- Option 1. One can use a did seed of `00000000000000000000000Endorser1` to create a new did
+- Option 2. One can use the Did `JJ5mHotESZ9a2W88tLB3FE` and verkey `~HWURmJQ7nyL6vAxhb39n2o` to register a did that is derived from the seed `00000000000000000000000Endorser2`
 
-Transaction has been signed:
-{"identifier":"V4SGRU86Z58d6TV7PBUe6f","operation":{"dest":"V4SGRU86Z58d6TV7PBUe6f","role":"0","type":"1","verkey":"~CoRER63DVYnWZtK8uAzNbx"},"protocolVersion":2,"reqId":1700440097985973563,"signatures":{"V4SGRU86Z58d6TV7PBUe6f":"4NRq1AvXi7pLtVEhhzfFLwyXJoewXnNX5RhRJK4XxP8fYaZf7o36MLhktvAwTV1NB4W6dZrb1GiEJhfaL5cXS4Lb"}}
-```
+More information can be found in the `environments/local/README.md` file.

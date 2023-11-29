@@ -36,14 +36,17 @@ remove_log_files() {
 
 # Loop through each module and perform the removals
 for module in "${MODULES[@]}"; do
+    module_etc_indy_path="$BASE_DIR/$module/etc_indy"
     module_lib_indy_path="$BASE_DIR/$module/lib_indy/fathomverse"
     module_log_indy_path="$BASE_DIR/$module/log_indy/fathomverse"
+
+    # Remove all __pycache__ directories in etc_indy
+    safe_remove_dir "$module_etc_indy_path/__pycache__"
     
     # Remove specific directories in lib_indy
     safe_remove_dir "$module_lib_indy_path/data"
     safe_remove_dir "$module_lib_indy_path/keys"
-    safe_remove_dir "$module_lib_indy_path/__pycache__"
-    safe_remove_dir "$module_lib_indy_path/plugins" # Remove plugins directory
+    safe_remove_dir "$module_lib_indy_path/../plugins" # Remove plugins directory
 
     # Remove all info.json files in lib_indy
     remove_info_json_files "$module_lib_indy_path"
