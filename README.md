@@ -1,4 +1,4 @@
-# fathomverse-infrastructure
+# Hyperledger Indy and Hyperledger Aries Infrastructure
 First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 ```
 .
