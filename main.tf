@@ -15,6 +15,13 @@ resource "docker_network" "sandbox_network" {
   }
 }
 
+module "aca_py" {
+  source = "./modules/aca_py"
+
+  ledger_browser_id   = module.ledger_browser.ledger_browser_container_id
+  aries_cloudagent_image = var.aries_cloudagent_image
+}
+
 module "indy_node1" {
   source            = "./modules/indy_node1"
   indy_network_name = var.indy_network_name

@@ -1,3 +1,9 @@
+variable "aries_cloudagent_image" {
+  description = "Docker image for Aries Cloud Agent"
+  type        = string
+  default     = "bcgovimages/aries-cloudagent:py36-1.16-1_0.7.5"
+}
+
 variable "indy_network_name" {
   description = "Network name for the Indy Node."
   type        = string

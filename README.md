@@ -7,15 +7,16 @@ First initial use-case with [Fathom PBC](https://www.fathompbc.org/)
 │   └── testnet
 ├── main.tf
 ├── modules
+│   ├── aca_py
 │   ├── indy_node1
 │   ├── indy_node2
 │   ├── indy_node3
 │   ├── indy_node4
-│   └── ledger_browser
+│   ├── ledger_browser
+│   └── tails_server
 ├── provider.tf
 ├── README.md
 ├── scripts
-│   ├── docker_network_port_scan.sh
 │   ├── generate_random_seeds.sh
 │   ├── sudo_cleanup_modules.sh
 │   └── update_indy_genesis_files.sh
@@ -42,26 +43,6 @@ To generate a random seeds to be used foreach node use the script:
 
 To update each module's genesis file with `environments/local` genesis files use the script:
 - `./scripts/update_indy_genesis_files.sh`
-
-To scan for any internal exposed ports in each docker container attached to a network use the scripts:
-```terminal
-./scripts/docker_network_port_scan.sh
-```
-example output:
-```console
-[INFO]   Found 1 containers in the network.
-[INFO]   Processing container ledger-browser with IP 10.133.133.9
-[...]    Checking 10.133.133.9:8000
-
-Starting Nmap 7.60 ( https://nmap.org ) at 2023-11-27 22:34 EST
-Nmap scan report for 10.133.133.9
-Host is up (0.00017s latency).
-
-PORT     STATE SERVICE
-8000/tcp open  http-alt
-
-Nmap done: 1 IP address (1 host up) scanned in 0.03 seconds
-```
 
 ### Transacting on localhosted Hyperledger Indy network
 Pre-requisites  
