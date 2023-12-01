@@ -1,15 +1,15 @@
-resource "docker_container" "aries-cloud-agent" {
+resource "docker_container" "aries-cloud-agent1" {
   command = [
     "start",
     "--auto-provision",
     "--arg-file=acapy-static-args.yml",
     "--inbound-transport", "http", "0.0.0.0", "8030",
-    "--endpoint=http://host.docker.internal:8030",
-    "--wallet-name='wallet_db'",
-    "--wallet-key='changekey'",
+    "--endpoint=http://${var.aries_cloudagent1_ipv4_address}:8030",
+    "--wallet-name", "wallet_db",
+    "--wallet-key", "changekey",
     "--seed", "00000000000000000000000Endorser1",
     "--admin", "0.0.0.0", "8031",
-    "--label='AGENT1'",
+    "--label", "Agent-1",
     "--admin-insecure-mode",
     "--tails-server-base-url=http://10.133.133.10:6543",
     "--tails-server-upload-url=http://10.133.133.10:6543"
@@ -18,10 +18,10 @@ resource "docker_container" "aries-cloud-agent" {
   depends_on = [var.ledger_browser_id]
 
   image = var.aries_cloudagent_image
-  name  = var.aries_cloudagent_name
+  name  = var.aries_cloudagent1_name
 
   dynamic "ports" {
-    for_each = var.aries_cloudagent_external_ports
+    for_each = var.aries_cloudagent1_external_ports
     content {
       internal = ports.value
       external = ports.value
@@ -30,7 +30,7 @@ resource "docker_container" "aries-cloud-agent" {
 
   networks_advanced {
     name         = var.docker_network_name
-    ipv4_address = var.aries_cloudagent_ipv4_address
+    ipv4_address = var.aries_cloudagent1_ipv4_address
   }
 
   volumes {
@@ -44,28 +44,48 @@ resource "docker_container" "aries-cloud-agent" {
 
 }
 
-# resource "docker_container" "postgres-wallet" {
-#   image = var.postgres_wallet_image
-#   name  = var.postgres_wallet_name
+resource "docker_container" "aries-cloud-agent2" {
+  command = [
+    "start",
+    "--auto-provision",
+    "--arg-file=acapy-static-args.yml",
+    "--inbound-transport", "http", "0.0.0.0", "8032",
+    "--endpoint=http://${var.aries_cloudagent2_ipv4_address}:8032",
+    "--wallet-name", "wallet_db",
+    "--wallet-key", "changekey",
+    "--seed", "00000000000000000000000Endorser2",
+    "--admin", "0.0.0.0", "8033",
+    "--label", "Agent-2",
+    "--admin-insecure-mode",
+    "--tails-server-base-url=http://10.133.133.10:6543",
+    "--tails-server-upload-url=http://10.133.133.10:6543"
+  ]
 
-#   env = [
-#     "POSTGRES_USER=${var.postgres_user}",
-#     "POSTGRES_PASSWORD=${var.postgres_password}"
-#   ]
+  depends_on = [var.ledger_browser_id]
 
-#   networks_advanced {
-#     name         = var.docker_network_name
-#     ipv4_address = var.postgres_wallet_ipv4_address
-#   }
+  image = var.aries_cloudagent_image
+  name  = var.aries_cloudagent2_name
 
-#   ports {
-#     internal = 5432
-#     external = var.postgres_wallet_port
-#   }
+  dynamic "ports" {
+    for_each = var.aries_cloudagent2_external_ports
+    content {
+      internal = ports.value
+      external = ports.value
+    }
+  }
 
-#   volumes {
-#     container_path = "/var/lib/postgresql/data"
-#     host_path      = abspath("${path.module}/${var.postgres_wallet_data_path}")
-#   }
+  networks_advanced {
+    name         = var.docker_network_name
+    ipv4_address = var.aries_cloudagent2_ipv4_address
+  }
 
-# }
+  volumes {
+    container_path = "/home/indy/acapy-static-args.yml"
+    host_path      = abspath("${path.module}/${var.acapy_static_args_path}")
+  }
+  volumes {
+    container_path = "/home/indy/genesis-transaction-list.yml"
+    host_path      = abspath("${path.module}/${var.genesis_transaction_list_path}")
+  }
+
+}

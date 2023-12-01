@@ -9,5 +9,5 @@
 **/fathomverse/*.json
 **/lib_indy/plugins
 **/log_indy/fathomverse/*.log
-
+**/log_indy/fathomverse/*.log.*
 container_ips.txt
