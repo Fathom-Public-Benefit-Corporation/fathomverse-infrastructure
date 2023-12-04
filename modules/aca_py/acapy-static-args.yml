@@ -1,5 +1,5 @@
 # connection behaviour
-public-invites: true
+public-invites: true # --public-invites
 auto-accept-invites: false
 auto-accept-requests: false
 monitor-ping: true # enables the connection status in the ui
@@ -29,7 +29,7 @@ auto-disclose-features: true
 
 # wallet
 auto-provision: true
-wallet-type: 'askar'
+wallet-type: 'askar-anoncreds'
 
 # revocation notifications (anoncreds only)
 notify-revocation: true
@@ -48,4 +48,4 @@ outbound-transport: http
 log-level: info
 
 # multi ledger support
-genesis-transactions-list: './genesis-transaction-list.yml'
+genesis-transactions-list: '/home/indy/genesis-transaction-list.yml'

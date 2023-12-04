@@ -1,4 +1,4 @@
-#aries_cloudagent_image = "ghcr.io/hyperledger/aries-cloudagent-python:py3.9-nightly"
+aries_cloudagent_image = "ghcr.io/hyperledger/aries-cloudagent-python:py3.9-nightly"
 
 indy_network_name = "fathomverse"
 indy_node_image   = "ghcr.io/hyperledger/indy-node-container/indy_node:1.12.6-ubuntu18-main"
