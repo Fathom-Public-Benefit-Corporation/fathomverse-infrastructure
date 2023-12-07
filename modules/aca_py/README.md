@@ -293,8 +293,27 @@ curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-      "schema_id": "JJ5mHotESZ9a2W88tLB3FE:2:CompetencyFramework:1.0",
+      "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:ctdlasn:1.0",
       "tag": "tag1",
       "support_revocation": true
     }'
+```
+
+Example Output:
+
+```json
+{
+  "sent": {
+    "credential_definition_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:19:tag1"
+  },
+  "credential_definition_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:19:tag1"
+}
+```
+
+### Other
+
+Multi-use inivitation url from Agent-1:
+
+```t
+http://10.133.133.12:8030?c_i=eyJAdHlwZSI6ICJodHRwczovL2RpZGNvbW0ub3JnL2Nvbm5lY3Rpb25zLzEuMC9pbnZpdGF0aW9uIiwgIkBpZCI6ICJhYTE2NThmYi0zZTUwLTRlOTItOTEzYS1jZGM0Nzk1ZGU5MjkiLCAibGFiZWwiOiAiQWdlbnQtMSIsICJyZWNpcGllbnRLZXlzIjogWyI2WmUxRTNFQ1N4ajMxZXpiU1l0ckJtMzlXUmdnY0JSSkV6dlg3UFhlVlB0WiJdLCAic2VydmljZUVuZHBvaW50IjogImh0dHA6Ly8xMC4xMzMuMTMzLjEyOjgwMzAifQ==
 ```
